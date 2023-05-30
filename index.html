@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1> C++ to Scratch </h1>
+  <div id="cpp_input">#include &lt;stdio.h&gt;
+  
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}</div>
+  <input>
+  <button id="gen">Generate </button>
+  <button id="copy"> Copy </button>
+  <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/ace.js" integrity="sha512-IdmB24zVCDjNtbu1v07uIbhNQVeaZEHc5pycdS/bzKoDeP4jgN8ZN3X3Akvtd84ZAroVIhUqG3+dy47WVswxlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    window.editor = ace.edit("cpp_input");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/c_cpp");
+
+    document.querySelector('#gen').onclick = async () => {
+      let res = await codeGen();
+      document.querySelector('input').value = res;
+      document.querySelector('input').style.opacity = "100%";
+      document.querySelector('#cpp_input').style.opacity = "0%";
+      document.querySelector('h1').style.top = "40%";
+      document.querySelector('#gen').style.opacity = "0%";
+      document.querySelector('#copy').style.opacity = "100%";
+    };
+
+    document.querySelector('#copy').onclick = () => {
+      document.querySelector('input').select();
+      document.querySelector('input').setSelectionRange(0, 99999)
+      navigator.clipboard.writeText(document.querySelector('input').value);
+    }
+  </script>
+</body>
+
+</html>
